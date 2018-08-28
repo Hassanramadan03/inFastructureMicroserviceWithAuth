@@ -1,0 +1,171 @@
+swagger: "2.0"
+info:
+  description: "rocket chat apis."
+  version: "0.0.1"
+  title: "tooli-rocketChat"
+ 
+host: "192.168.1.109:3000"
+basePath: "/"
+tags:
+- name: "meet"
+
+schemes:
+- "https"
+- "http"
+paths:
+  /meet/open:
+    post:
+      tags:
+      - "meet"
+      summary: "open a stream audio or video meetin and creat the meet key"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "meet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Meet"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MeetingKey"
+        400:
+          description: "Invalid tag value"
+  /meet/getKey:
+    post:
+      tags:
+      - "meet"
+      summary: "get a stream audio or video meetin and creat the meet key"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Meet"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MeetingKey"
+        400:
+          description: "Invalid tag value"
+  /meet/delete:
+    post:
+      tags:
+      - "meet"
+      summary: "Removing the meeting after disconnecting"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "meet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/MeetingKey"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+           $ref: "#/definitions/deletedModel"
+               
+                
+           
+        400:
+          description: "Invalid status value"
+      
+  /meet/getAll:
+    get:
+      tags:
+      - "meet"
+      summary: "Finds all meeting in the database"
+      description: ""
+      operationId: "findPetsByTags"
+      produces:
+      - "application/json"
+     
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Meet"
+        400:
+          description: "Invalid tag value"
+     
+ 
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Meet:
+    type: "object"
+    required:
+    - "userId"
+    - "invitedUsers"
+    - "roomId"
+    properties:
+      userId:
+        type: "string"
+        example: "572f16439c0d3ffe0bc084b4"
+      roomId:
+        type: "string"
+        example: "572f16439c0d3ffe0bc084a4"
+      invitedUsers:
+        type: "array"
+        items:
+          type: "string"
+          example: "572f16439c0d3ffe0bc084a4"
+  MeetingKey:
+    type: "object"
+    required:
+    - "meetingKey"
+    properties:
+       meetingKey:
+        type: "string"
+        example: "572f16439c0d3ffe0bc084a4"
+  deletedModel:
+    type: "object"
+    properties:
+       n:
+        type: 'number'
+        example: "2"
+            
+       ok:
+        type: 'number'
+        example: "1"        
+        
+        
+   
+
+externalDocs:
+  description: "Find out more about tooli"
+  url: "http://192.168.1.109:3000/home"

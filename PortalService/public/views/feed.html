@@ -1,0 +1,111 @@
+<style>
+  .checked {
+    color: orange;
+  }
+</style>
+<div class="container">
+  <div class="col-xs-12 page-header">
+    <div class="col-xs-12">
+      <div class="col-lg-4 col-xs-12">
+        <input type="text" id="myInput" class="form-control" ng-model="search" placeholder="Search ..">
+      </div>
+      <div class="col-lg-6 col-xs-12">
+         <label  class="col-xs-4">  filter by salary  </label>
+        <div class="col-xs-4">
+          <input type="number" ng-model="selectedUser.min" min="1" class="form-control" placeholder="from">
+
+        </div>
+        <div class="col-xs-4">
+          <input type="number" ng-model="selectedUser.max" min="1" class="form-control" placeholder="to">
+
+        </div>
+      </div>
+      <div class="col-lg-2 col-xs-12">
+        <a class="btn btn-primary" href="/addProduct">Add New</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+    <div dir-paginate='i in products|filter:search|filter:byRange("price",selectedUser.min,selectedUser.max)|itemsPerPage:9 ' class="col-xs-12 col-md-6 col-lg-4">
+      <div class="movie-card">
+        <div class="movie-header manOfSteel" ng-style="readyStyleObject(products[$index].image)">
+
+        </div>
+        <!--movie-header-->
+        <div class="movie-content">
+          <div class="movie-content-header">
+            <small class="movie-title">{{i.title}}</small>
+            <label class="movie-title pull-right">
+              <span class="glyphicon glyphicon-euro"></span>{{i.price}}</label>
+            <div class="imax-logo"></div>
+          </div>
+          <div class="movie-info">
+            <div class="info-section">
+              <label>Edit</label>
+              <a class="btn btn-default btn-lg" href="/addProduct?id={{i}}">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+            </div>
+            <!--row-->
+            <div class="info-section">
+              <label>Description</label>
+              <a type="button" ng-click='setDes(products[$index].des)' class="btn btn-info btn-lg" data-toggle="modal" data-target="#x">
+                <span>A</span>
+              </a>
+            </div>
+            <div class="info-section">
+              <label>Delete</label>
+              <button type="button" ng-click="AssignId(products[$index]._id)" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#xx">
+                <span></span>X</button>
+            </div>
+          </div>
+          <div></div>
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<hr>
+<dir-pagination-controls style="display:block;text-align:center;"></dir-pagination-controls>
+
+</div>
+<div id="x" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{des}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="xx" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 style="font: red" class="modal-title">Remove</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are Sure That you want to Delete this Product ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click='Delete()' class="btn btn-danger" data-dismiss="modal">yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  hostname: localhost
+apiEndpoints:
+  auth:
+    host: 'localhost'
+    paths:
+      # - '/discussions/*'
+      # - '/healthz'
+      - '/auth/:sign'
+
+  media:
+    host: 'localhost'
+    paths: '/media/posts/:id'
+      
+serviceEndpoints:
+  authService:
+    url: 'http://localhost:8001'
+  mediaService:
+    url: 'http://localhost:8070'
+policies:
+  - expression
+  - key-auth
+  - proxy
+pipelines:
+  - name: Auths
+    apiEndpoints:
+      - auth
+    policies:
+      # - expression:
+      #   - action:
+      #       jscode: |
+      #         if (req.url.startsWith('/discussions')) {
+      #           const slug = req.url.substr('/discussions'.length);
+      #           req.url = '/d' + slug;
+      #         }
+      - proxy:
+        - action:
+            serviceEndpoint: authService
+  - name: Meidas
+    apiEndpoints:
+      - media
+    policies:
+      # - key-auth:
+      - proxy:
+        - action:
+            serviceEndpoint: mediaService

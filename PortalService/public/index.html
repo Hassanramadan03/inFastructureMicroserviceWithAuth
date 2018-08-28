@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NodeTest</title>
+  <!-- Meta Tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="/icon.ico" type="image/x-icon">
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel='stylesheet prefetch' href='/css/stylesheet.css'>
+  <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <base href='/' />
+</head>
+
+<body ng-app="app">
+  <div id="page-wrapper">
+    <header id="header" class="navbar-static-top">
+
+    </header>
+    <div class="container">
+      <ng-view>loading...</ng-view>
+    </div>
+
+    <footer>
+      <foot></foot>
+
+    </footer>
+  </div>
+  <!-- Javascript-->
+
+
+
+  <!-- calling angular packages  -->
+
+
+
+  <script src="/angular/angular.min.js"></script>
+  <script src="/angular/satellizer.js"></script>
+  <script src="/angular/angular-route.min.js"></script>
+  <script src="/angular/angularUtils-pagination/dirPagination.js"></script>
+
+  <script src="/app/app.js"></script>
+  <script src="/app/directives/headerDirective.js"></script>
+  <script src="/app/directives/footerDirective.js"></script>
+  <script src="/app/controllers/homeCtrl.js"></script>
+
+  <script src="/app/controllers/feedCtrl.js"></script>
+  <script src="/app/controllers/productCtrl.js"></script>
+  <script src="/app/controllers/addProduct.js"></script>
+  <script src="/app/services/feedService.js"></script>
+
+  <script src="/app/controllers/signupCtrl.js"></script>
+  <script src="/app/controllers/loginCtrl.js"></script>
+
+
+
+</body>
+
+</html>

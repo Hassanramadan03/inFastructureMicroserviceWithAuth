@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <img class="col-xs-12"ng-if="flage" class="img-circle" style="  width:400px;height:300px ; margin-bottom: 3%;" src="uploadimages/{{product.image}}">
+        <br>
+        <hr>
+        <form style="margin-bottom: 2%" method="post"      name="addProductForm">
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : addProductForm.title.$touched && addProductForm.title.$error.required }">
+                <div class="form-group">
+                    <input class="form-control input-lg" type="text" name="title" ng-model="product.title" placeholder="Product Name" required
+                        autofocus>
+                </div>
+                <span class="ion-person form-control-feedback"></span>
+                <div class="help-block text-danger" ng-if="addProductForm.title.$touched && addProductForm.title.$error.required" ng-messages="addProductForm.firstname.$error">
+                    <div ng-message="required">You must enter the product Name.</div>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : addProductForm.price.$touched && addProductForm.price.$error.required }">
+                <div class="form-group">
+                    <input class="form-control input-lg" type="number" name="price" ng-model="product.price" placeholder="Product Price" required
+                        autofocus>
+                </div>
+                <span class="ion-person form-control-feedback"></span>
+        
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : addProductForm.des.$touched && addProductForm.des.$error.required }">
+        
+                <div class="form-group">
+                    <textarea class="form-control" style="min-width: 100%" type="text" name="des" ng-model="product.des" placeholder="Product Description"
+                        required></textarea>
+                </div>
+                <span class="ion-person form-control-feedback"></span>
+                <div class="help-block text-danger" ng-if="addProductForm.des.$touched && addProductForm.des.$error.required" ng-messages="addProductForm.firstname.$error">
+                    <div ng-message="required">You must enter the product Description.</div>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error' : addProductForm.file.$touched && addProductForm.file.$error.required }">
+                <div class="form-group">
+                    <input class="form-control input-lg"  type="file" name="imageFile" ng-model="imageFile" placeholder="Product image"
+                        autofocus>
+                       
+                </div>
+        
+            </div>
+            <button  ng-click="updateProduct()"  ng-if="flage" ng-disabled="addProductForm.$invalid" class="btn btn-lg btn-block btn-success">Update</button>
+            <button  ng-click="addProduct()"   ng-if="!flage" ng-disabled="addProductForm.$invalid" class="btn btn-lg btn-block btn-primary">Add</button>
+            <div ng-if="response" class="form-group has-feedback" ng-class="{ 'has-error' : response()}">
+                <div class="help-block text-danger" ng-if='response()'>
+                    <div>{{reply}}</div>
+        
+                </div>
+            </div>
+        
+        </form>
+    </div>
+</div>
